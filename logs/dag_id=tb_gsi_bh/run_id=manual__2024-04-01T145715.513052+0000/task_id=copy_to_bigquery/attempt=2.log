@@ -1,0 +1,41 @@
+[2024-04-01T15:02:39.172+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: tb_gsi_bh.copy_to_bigquery manual__2024-04-01T14:57:15.513052+00:00 [queued]>
+[2024-04-01T15:02:39.224+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: tb_gsi_bh.copy_to_bigquery manual__2024-04-01T14:57:15.513052+00:00 [queued]>
+[2024-04-01T15:02:39.236+0000] {taskinstance.py:2193} INFO - Starting attempt 2 of 2
+[2024-04-01T15:02:39.396+0000] {taskinstance.py:2217} INFO - Executing <Task(GCSToBigQueryOperator): copy_to_bigquery> on 2024-04-01 14:57:15.513052+00:00
+[2024-04-01T15:02:39.415+0000] {standard_task_runner.py:60} INFO - Started process 458 to run task
+[2024-04-01T15:02:39.427+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'tb_gsi_bh', 'copy_to_bigquery', 'manual__2024-04-01T14:57:15.513052+00:00', '--job-id', '52', '--raw', '--subdir', 'DAGS_FOLDER/GSIBH.py', '--cfg-path', '/tmp/tmpo_q5sn7t']
+[2024-04-01T15:02:39.453+0000] {standard_task_runner.py:88} INFO - Job 52: Subtask copy_to_bigquery
+[2024-04-01T15:02:39.684+0000] {task_command.py:423} INFO - Running <TaskInstance: tb_gsi_bh.copy_to_bigquery manual__2024-04-01T14:57:15.513052+00:00 [running]> on host 15476aa6430d
+[2024-04-01T15:02:40.036+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='tb_gsi_bh' AIRFLOW_CTX_TASK_ID='copy_to_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2024-04-01T14:57:15.513052+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-04-01T14:57:15.513052+00:00'
+[2024-04-01T15:02:40.115+0000] {connection.py:269} WARNING - Connection schemes (type: google_cloud_platform) shall not contain '_' according to RFC3986.
+[2024-04-01T15:02:40.119+0000] {base.py:83} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2024-04-01T15:02:40.121+0000] {gcs_to_bigquery.py:379} INFO - Using existing BigQuery table for storing data...
+[2024-04-01T15:02:40.122+0000] {credentials_provider.py:353} INFO - Getting connection using `google.auth.default()` since no explicit credentials are provided.
+[2024-04-01T15:02:40.173+0000] {_default.py:338} WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+[2024-04-01T15:02:40.174+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/transfers/gcs_to_bigquery.py", line 380, in execute
+    self.configuration = self._use_existing_table()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/transfers/gcs_to_bigquery.py", line 582, in _use_existing_table
+    default_project_id=self.hook.project_id,
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/common/hooks/base_google.py", line 372, in project_id
+    _, project_id = self.get_credentials_and_project_id()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/common/hooks/base_google.py", line 284, in get_credentials_and_project_id
+    credentials, project_id = get_credentials_and_project_id(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/utils/credentials_provider.py", line 362, in get_credentials_and_project_id
+    return _CredentialProvider(*args, **kwargs).get_credentials_and_project()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/utils/credentials_provider.py", line 243, in get_credentials_and_project
+    credentials, project_id = self._get_credentials_using_adc()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/utils/credentials_provider.py", line 348, in _get_credentials_using_adc
+    credentials, project_id = google.auth.default(scopes=self.scopes)
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/auth/_default.py", line 691, in default
+    raise exceptions.DefaultCredentialsError(_CLOUD_SDK_MISSING_CREDENTIALS)
+google.auth.exceptions.DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+[2024-04-01T15:02:40.198+0000] {taskinstance.py:1149} INFO - Marking task as FAILED. dag_id=tb_gsi_bh, task_id=copy_to_bigquery, execution_date=20240401T145715, start_date=20240401T150239, end_date=20240401T150240
+[2024-04-01T15:02:40.278+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 52 for task copy_to_bigquery (Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.; 458)
+[2024-04-01T15:02:40.321+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-04-01T15:02:40.415+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check

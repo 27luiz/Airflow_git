@@ -1,0 +1,30 @@
+[2024-04-02T22:53:57.539+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: tb_gsi_bh.copy_to_bigquery manual__2024-04-02T22:53:52.773844+00:00 [queued]>
+[2024-04-02T22:53:57.566+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: tb_gsi_bh.copy_to_bigquery manual__2024-04-02T22:53:52.773844+00:00 [queued]>
+[2024-04-02T22:53:57.567+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 2
+[2024-04-02T22:53:57.670+0000] {taskinstance.py:2217} INFO - Executing <Task(GCSToBigQueryOperator): copy_to_bigquery> on 2024-04-02 22:53:52.773844+00:00
+[2024-04-02T22:53:57.692+0000] {standard_task_runner.py:60} INFO - Started process 9380 to run task
+[2024-04-02T22:53:57.703+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'tb_gsi_bh', 'copy_to_bigquery', 'manual__2024-04-02T22:53:52.773844+00:00', '--job-id', '70', '--raw', '--subdir', 'DAGS_FOLDER/GSIBH.py', '--cfg-path', '/tmp/tmp6z9cp6wh']
+[2024-04-02T22:53:57.708+0000] {standard_task_runner.py:88} INFO - Job 70: Subtask copy_to_bigquery
+[2024-04-02T22:53:57.790+0000] {task_command.py:423} INFO - Running <TaskInstance: tb_gsi_bh.copy_to_bigquery manual__2024-04-02T22:53:52.773844+00:00 [running]> on host 15476aa6430d
+[2024-04-02T22:53:57.923+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='tb_gsi_bh' AIRFLOW_CTX_TASK_ID='copy_to_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2024-04-02T22:53:52.773844+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-04-02T22:53:52.773844+00:00'
+[2024-04-02T22:53:57.948+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/transfers/gcs_to_bigquery.py", line 322, in execute
+    hook = BigQueryHook(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 119, in __init__
+    super().__init__(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/common/hooks/base_google.py", line 251, in __init__
+    self.extras: dict = self.get_connection(self.gcp_conn_id).extra_dejson
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/hooks/base.py", line 82, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/connection.py", line 514, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `google_cloud_default` isn't defined
+[2024-04-02T22:53:57.957+0000] {taskinstance.py:1149} INFO - Marking task as UP_FOR_RETRY. dag_id=tb_gsi_bh, task_id=copy_to_bigquery, execution_date=20240402T225352, start_date=20240402T225357, end_date=20240402T225357
+[2024-04-02T22:53:57.975+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 70 for task copy_to_bigquery (The conn_id `google_cloud_default` isn't defined; 9380)
+[2024-04-02T22:53:57.995+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-04-02T22:53:58.035+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check
